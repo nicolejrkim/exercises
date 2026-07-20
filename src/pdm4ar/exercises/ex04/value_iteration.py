@@ -3,14 +3,22 @@ from pdm4ar.exercises.ex04.mdp import GridMdp, GridMdpSolver
 from pdm4ar.exercises.ex04.structures import Policy, ValueFunc
 from pdm4ar.exercises_def.ex04.utils import time_function
 
+TOLERANCE = 1e-10
+MAX_ITERATIONS = 10_000
+
 
 class ValueIteration(GridMdpSolver):
     @staticmethod
     @time_function
     def solve(grid_mdp: GridMdp) -> tuple[ValueFunc, Policy]:
-        value_func = np.zeros_like(grid_mdp.grid).astype(float)
-        policy = np.zeros_like(grid_mdp.grid).astype(int)
+        model = grid_mdp.model
+        value = np.zeros(len(model.states), dtype=np.float64)
 
-        # todo implement here
+        for _ in range(MAX_ITERATIONS):
+            updated = np.max(model.q_values(value), axis=1)
+            delta = np.max(np.abs(updated - value))
+            value = updated
+            if delta < TOLERANCE:
+                break
 
-        return value_func, policy
+        return model.to_grids(value, model.greedy(value))

@@ -1,0 +1,60 @@
+================================================================================
+PROMPT USED TO IMPLEMENT EXERCISE 04 (Dynamic Programming)
+Session date: 2026-07-20
+Model:        Claude Opus 4.8 (1M context)  --  model id: claude-opus-4-8[1m]
+Tool:         Claude Code (Anthropic's official CLI)
+================================================================================
+
+--------------------------------------------------------------------------------
+[1] INITIAL PROMPT (verbatim)
+--------------------------------------------------------------------------------
+Let's solve exercise 04, /Users/jaerkim/pdm4ar_26f/exercises/src/pdm4ar/exercises/ex04 descriptions are here /Users/jaerkim/pdm4ar_26f/exercises/docs/04-dynamicprogramming.md  Note that the python we will use is ### Python
+
+Python will be the programming language adopted in this course. You don't need to install Python on your local machine because you'll work in a Docker container with Python preinstalled (more information below).
+
+--------------------------------------------------------------------------------
+[2] FOLLOW-UP SENT MID-TURN (verbatim)
+--------------------------------------------------------------------------------
+## Docker
+
+We will run the exercises in a containerized environment, a technique widely used in modern software development. Read the [Resources](#docker-resources) section for more information on Docker.
+
+--------------------------------------------------------------------------------
+[3] SUBSEQUENT PROMPTS (verbatim)
+--------------------------------------------------------------------------------
+Why can't we run a container
+
+Ok so we can run it over the container right?
+
+Save the prompt we used to implement in .txt file
+
+
+================================================================================
+FILES IMPLEMENTED
+================================================================================
+src/pdm4ar/exercises/ex04/mdp.py
+src/pdm4ar/exercises/ex04/value_iteration.py
+src/pdm4ar/exercises/ex04/policy_iteration.py
+
+================================================================================
+HOW TO RUN THE HARNESS (in the devcontainer)
+================================================================================
+# `nervous_aryabhata` is the auto-generated devcontainer name and changes on
+# restart -- find the current one with `docker ps` (image: vsc-exercises-*).
+
+docker exec nervous_aryabhata bash -lc \
+  'cd /workspaces/exercises && MPLBACKEND=agg PYTHONPATH=src \
+   /home/vscode/.venv/bin/python src/pdm4ar/main.py --exercise "04"'
+
+# Notes:
+#  - use /home/vscode/.venv/bin/python (system python has no numpy)
+#  - PYTHONPATH=src is required (pdm4ar is not pip-installed into that venv)
+#  - reports are written to out/04/index.html
+
+================================================================================
+RESULT
+================================================================================
+n_test_cases: 21, n_completed: 21, exceptions: []
+value_iteration:  policy_accuracy 1.0  value_func_r2 1.0  solve_time 0.110s
+policy_iteration: policy_accuracy 1.0  value_func_r2 1.0  solve_time 0.097s
+transition_prob:  accuracy 1.0
